@@ -1,0 +1,30 @@
+# khaojai-approval-flow — project rules
+
+## What this repo is
+
+- **Standalone React library** for the visual approval-flow editor (XYFlow graph, steps, conditions, drawers).
+- **Not** the Khaojai AI monorepo (`khaojai-ai`). Do not assume `khaojai-ui` paths (`@/…`) exist here unless the host app provides aliases.
+- **Default rule:** change **only this package**. Do **not** edit sibling repos (e.g. `../khaojai-ai/khaojai-ui`) unless the user **explicitly** asks to wire or migrate integration.
+
+## Architecture (must follow)
+
+1. **Host adapters** — App-specific pieces (HTTP `get`, `getFormsByIds`, `FormBuilder`, table filters, `PDFIntegrationsList`, `ModalConditionSetting`, `SelectDepartmentComponent`, etc.) are **not** imported from a fixed app path. They are resolved via `registerApprovalFlowAdapters()` in [`src/adapters.ts`](src/adapters.ts). Any new drawer/modal that needs the host must extend `ApprovalFlowAdapters` and document the new field.
+2. **Public API** — Export from [`src/index.ts`](src/index.ts) only what consumers need: `ApprovalFlow`, `ApprovalFlowProvider`, `useApprovalFlowContext`, transforms, JSON helpers (`parseApprovalFlowJson`, `mapApprovalApiResponseToFlowData`), `ImportFlowJsonModal`, `registerApprovalFlowAdapters`, types.
+3. **Types** — Core types live under `src/components/interface` (`ApprovalFlowData`, `Step`, etc.). Keep them stable for JSON import/export and API mapping.
+4. **Internal imports** — Prefer relative imports within `src/`. Do not introduce `@/` unless the build explicitly supports path aliases for this package.
+
+## Implementation standards
+
+- **TypeScript:** `strict`; run `pnpm run typecheck` (or `npm run typecheck`) after substantive changes.
+- **Peers:** Add new UI dependencies as **peerDependencies** when they are provided by the host (React, Ant Design, XYFlow, Refine, styled-components, i18next).
+- **i18n:** Components use `react-i18next` (`useTranslation`). Keys often mirror `approveBoxFlow` / `approval-setting` in the host; keep keys documented or use sensible `defaultValue` where needed.
+- **No silent coupling:** Do not re-introduce direct imports to `khaojai-ui` or other application trees.
+
+## Features to preserve
+
+- **JSON:** `parseApprovalFlowJson` and `mapApprovalApiResponseToFlowData` should stay aligned with API / `ApprovalFlowData` shapes.
+- **Flow state:** `ApprovalFlowProvider` holds `ApprovalFlowData`; editors update via `setFlow`.
+
+## Documentation
+
+- High-level usage and integration boundaries: see [`README.md`](README.md).

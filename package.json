@@ -1,0 +1,92 @@
+{
+  "name": "@khaojai/approval-flow",
+  "version": "0.1.0",
+  "description": "Standalone approval flow editor package for React applications.",
+  "license": "UNLICENSED",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/insightblue-co/khaojai-approvalflow.git"
+  },
+  "homepage": "https://github.com/insightblue-co/khaojai-approvalflow#readme",
+  "bugs": {
+    "url": "https://github.com/insightblue-co/khaojai-approvalflow/issues"
+  },
+  "keywords": [
+    "approval",
+    "workflow",
+    "react",
+    "xyflow",
+    "antd",
+    "editor"
+  ],
+  "publishConfig": {
+    "access": "public"
+  },
+  "type": "module",
+  "main": "./dist/index.cjs",
+  "module": "./dist/index.js",
+  "types": "./dist/index.d.ts",
+  "exports": {
+    ".": {
+      "types": "./dist/index.d.ts",
+      "import": "./dist/index.js",
+      "require": "./dist/index.cjs",
+      "default": "./dist/index.js"
+    }
+  },
+  "files": [
+    "dist"
+  ],
+  "peerDependencies": {
+    "@ant-design/icons": "^5.0.0 || ^6.0.0",
+    "@refinedev/antd": "^5.0.0",
+    "@refinedev/core": "^4.0.0",
+    "@tanstack/react-query": "^4.10.1",
+    "@xyflow/react": "^12.0.0",
+    "antd": "^5.0.0",
+    "i18next": ">=20.0.0",
+    "react": "^18.0.0",
+    "react-dom": "^18.0.0",
+    "react-i18next": ">=11.0.0",
+    "solar-icon-set": "^1.0.0",
+    "styled-components": "^6.0.0"
+  },
+  "scripts": {
+    "build": "tsup",
+    "changeset": "changeset",
+    "version-packages": "changeset version && pnpm install --no-frozen-lockfile",
+    "release": "pnpm run build && npm publish --access public --provenance",
+    "pack:check": "npm pack --dry-run",
+    "prepublishOnly": "pnpm run typecheck && pnpm run test && pnpm run build",
+    "typecheck": "tsc --noEmit",
+    "test": "vitest run",
+    "test:watch": "vitest"
+  },
+  "pnpm": {
+    "overrides": {
+      "i18next": "21.10.0",
+      "react-i18next": "11.18.6"
+    }
+  },
+  "devDependencies": {
+    "@ant-design/icons": "^6.1.0",
+    "@changesets/cli": "^2.30.0",
+    "@refinedev/antd": "^5.47.0",
+    "@refinedev/core": "^4.58.0",
+    "@tanstack/react-query": "^4.10.1",
+    "@types/node": "^25.5.0",
+    "@types/react": "^18.3.3",
+    "@types/react-dom": "^18.0.0",
+    "@xyflow/react": "^12.0.0",
+    "antd": "^5.0.0",
+    "i18next": "21.10.0",
+    "react": "18.3.1",
+    "react-dom": "18.3.1",
+    "react-i18next": "11.18.6",
+    "solar-icon-set": "^1.0.0",
+    "styled-components": "^6.0.0",
+    "tsup": "^8.5.1",
+    "typescript": "^4.7.4",
+    "vitest": "^4.1.0"
+  }
+}
