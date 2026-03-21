@@ -2,5 +2,5 @@
 
 All notable changes to this package will be documented in this file.
 
-The release workflow uses Changesets to manage version bumps and publish
-releases for `@khaojai/approval-flow`.
+The release workflow publishes `@khaojai/approval-flow` directly from `main`
+with an automatic patch version bump.

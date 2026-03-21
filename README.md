@@ -24,7 +24,7 @@ Publish or link uses the `files` field (`dist` only), so **build before** `npm p
 
 ## Publish to npm
 
-The package is prepared for npm publication with **Changesets** and **GitHub Actions**.
+The package is prepared for npm publication with **GitHub Actions** and direct publish from `main`.
 
 Before the first publish:
 
@@ -34,16 +34,15 @@ Before the first publish:
 
 Release flow:
 
-1. Add a changeset with `pnpm run changeset` for each releasable change.
-2. Merge the change into `main`.
-3. GitHub Actions creates or updates a release PR with the version bump.
-4. Merge that release PR into `main`.
-5. The release workflow publishes the new version to npm.
+1. Push a change to `main`.
+2. The release workflow validates the package, bumps the patch version, and publishes `@khaojai/approval-flow` to npm.
+3. The workflow pushes the release commit and git tag back to `main`.
 
 Notes:
 
 - `pnpm run prepublishOnly` validates typecheck, tests, and build before a direct publish.
 - `pnpm run pack:check` shows what would go into the npm tarball.
+- The workflow uses a `[skip release]` marker in the automated release commit message so the version-bump commit does not trigger a second publish loop.
 - Consumers do **not** update automatically just because `main` changes. They receive updates when they install a newer published version that matches their semver range and redeploy.
 
 ## Sample app (POC)

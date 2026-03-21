@@ -53,8 +53,6 @@
   },
   "scripts": {
     "build": "tsup",
-    "changeset": "changeset",
-    "version-packages": "changeset version && pnpm install --no-frozen-lockfile",
     "release": "pnpm run build && npm publish --access public --provenance",
     "pack:check": "npm pack --dry-run",
     "prepublishOnly": "pnpm run typecheck && pnpm run test && pnpm run build",
@@ -70,7 +68,6 @@
   },
   "devDependencies": {
     "@ant-design/icons": "^6.1.0",
-    "@changesets/cli": "^2.30.0",
     "@refinedev/antd": "^5.47.0",
     "@refinedev/core": "^4.58.0",
     "@tanstack/react-query": "^4.10.1",
