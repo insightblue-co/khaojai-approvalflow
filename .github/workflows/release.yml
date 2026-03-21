@@ -44,7 +44,8 @@ jobs:
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
 
       - name: Bump patch version
-        run: npm version patch -m "chore: release v%s [skip release]"
+        run: |
+          npm version patch -m "chore: release v%s [skip release]"
 
       - name: Publish to npm
         env:
